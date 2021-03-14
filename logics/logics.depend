@@ -1,8 +1,88 @@
 # depslib dependency file v1.0
-1615722541 source:c:\users\theodor\documents\github\car-chaser\logics\main.cpp
-	<iostream>
-
 1615724985 source:c:\users\theodor\documents\github\car-chaser\logics\bin\icon.rc
 
-1615722459 source:c:\users\theodor\documents\github\car-chaser\logics\icon.rc
+1615732279 source:c:\users\theodor\documents\github\car-chaser\logics\butoane.cpp
+	"bin/Headers/butoane.h"
+
+1615731636 c:\users\theodor\documents\github\car-chaser\logics\bin\headers\butoane.h
+	<graphics.h>
+	"culori.h"
+
+1615729866 c:\users\theodor\documents\github\car-chaser\logics\bin\headers\culori.h
+
+1615736160 source:c:\users\theodor\documents\github\car-chaser\logics\main.cpp
+	<winbgim.h>
+	<graphics.h>
+	<iostream>
+	"Headers/meniu.h"
+	"Headers/textSettings.h"
+
+1615726129 c:\users\theodor\documents\github\car-chaser\logics\bin\headers\textsettings.h
+
+1615730165 c:\users\theodor\documents\github\car-chaser\logics\bin\headers\resursemedia.h
+	<windows.h>
+	<mmsystem.h>
+
+1615732456 source:c:\users\theodor\documents\github\car-chaser\logics\meniu.cpp
+	"bin/Headers/culori.h"
+	"bin/Headers/butoane.h"
+	"bin/Headers/resurseMedia.h"
+
+1615732290 source:c:\users\theodor\documents\github\car-chaser\logics\resursemedia.cpp
+	"bin/Headers/resurseMedia.h"
+	<stdio.h>
+
+1615732296 source:c:\users\theodor\documents\github\car-chaser\logics\textsettings.cpp
+	"bin/Headers/textSettings.h"
+	<graphics.h>
+
+1615736505 c:\users\theodor\documents\github\car-chaser\logics\headers\meniu.h
+	"consola.h"
+	"culori.h"
+	"butoane.h"
+	"resurseMedia.h"
+
+1615734628 c:\users\theodor\documents\github\car-chaser\logics\headers\textsettings.h
+	<graphics.h>
+
+1615736078 c:\users\theodor\documents\github\car-chaser\logics\headers\butoane.h
+	<graphics.h>
+	"resurseMedia.h"
+	"culori.h"
+
+1615729866 c:\users\theodor\documents\github\car-chaser\logics\headers\culori.h
+
+1615736015 c:\users\theodor\documents\github\car-chaser\logics\headers\resursemedia.h
+	<windows.h>
+	<mmsystem.h>
+
+1615732982 source:c:\users\theodor\documents\github\car-chaser\logics\bin\headers\butoane.cpp
+	"butoane.h"
+
+1615733096 source:c:\users\theodor\documents\github\car-chaser\logics\bin\headers\meniu.cpp
+	"culori.h"
+	"butoane.h"
+	"resurseMedia.h"
+
+1615733101 source:c:\users\theodor\documents\github\car-chaser\logics\bin\headers\textsettings.cpp
+	"textSettings.h"
+	<graphics.h>
+
+1615732982 source:c:\users\theodor\documents\github\car-chaser\logics\headers\butoane.cpp
+	"butoane.h"
+
+1615733096 source:c:\users\theodor\documents\github\car-chaser\logics\headers\meniu.cpp
+	"culori.h"
+	"butoane.h"
+	"resurseMedia.h"
+
+1615733110 source:c:\users\theodor\documents\github\car-chaser\logics\headers\resursemedia.cpp
+	"resurseMedia.h"
+	<stdio.h>
+
+1615733101 source:c:\users\theodor\documents\github\car-chaser\logics\headers\textsettings.cpp
+	"textSettings.h"
+	<graphics.h>
+
+1615736484 c:\users\theodor\documents\github\car-chaser\logics\headers\consola.h
 

@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="../dasf" prefix_auto="1" extension_auto="1" />
+				<Option output="../Car-Chaser" prefix_auto="1" extension_auto="1" />
 				<Option object_output="bin/debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -32,10 +32,23 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="bin/Headers/butoane.h" />
+		<Unit filename="bin/Headers/culori.h" />
+		<Unit filename="bin/Headers/meniu.h" />
+		<Unit filename="bin/Headers/resurseMedia.h" />
+		<Unit filename="bin/Headers/textSettings.h" />
+		<Unit filename="bin/Sources/butoane.cpp" />
+		<Unit filename="bin/Sources/meniu.cpp" />
+		<Unit filename="bin/Sources/resurseMedia.cpp" />
+		<Unit filename="bin/Sources/textSettings.cpp" />
 		<Unit filename="bin/icon.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="butoane.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="meniu.cpp" />
+		<Unit filename="resurseMedia.cpp" />
+		<Unit filename="textSettings.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
