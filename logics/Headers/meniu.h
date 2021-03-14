@@ -5,6 +5,7 @@
 #include "culori.h"
 #include "butoane.h"
 #include "resurseMedia.h"
+#include "joc.h"
 
 void Iesire()
 {
@@ -15,7 +16,6 @@ void Iesire()
         outtextxy(getmaxx()/2,getmaxy()/2,"EXITING...");
         setvisualpage(3);//AFISARE ACEEASI PAGINA
         efectSonor("iesire");
-        //DE IMPLEMENTAT SALVAREA LISTELOR <<<<<<<<<<--------------------
         closegraph();//INCHIDERE GRAPH
         afiseazaConsola();//AFISEAZA CONSOLA
         exit(0);//IESIRE DIN PROGRAM
@@ -60,39 +60,8 @@ void afisareMeniu(int &indexPagina)
     /**/
     /**MENIU DE LISTE**/
     case 11:
-        /*listaSimpla*/
-        dinamicaButon(x,y,8,indexPagina,111);
-        //
-        /*listaDubla*/
-        dinamicaButon(x,y,9,indexPagina,112);
-        //
-        /*Stiva*/
-        dinamicaButon(x,y,10,indexPagina,113);
-        //
-        /*Coada*/
-        dinamicaButon(x,y,11,indexPagina,114);
-        //
-        /*BACK*/
-        dinamicaButon(x,y,7,indexPagina,1);
-        //
-        break;
-    /**/
-    /*/**LISTE**/
-    /*case 111:
-        //if(!consolaAfisata) mutaConsola(),consolaAfisata=1;
-        main_listaSimpla();
-        setcurrentwindow(window);
-        initiereTextSettings();
-        indexPagina=11;
-        break;
-    /**/
-    /**LISTE**/
-    /*case 112:
-        //if(!consolaAfisata) mutaConsola(),consolaAfisata=1;
-        main_listaDubla();
-        setcurrentwindow(window);
-        initiereTextSettings();
-        indexPagina=11;
+        if(!joc()) indexPagina=1;
+        //buton e dupa ce moare
         break;
     /**/
     /**IESIRE**/

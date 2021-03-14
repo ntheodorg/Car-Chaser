@@ -24,7 +24,7 @@ int main()
 
         afisareMeniu(paginaMeniu);
 
-        delay(5);
+        delay(2);
         page=1-page; //ALTERNEAZA CADRUL INTRE 1 SI 0
     }while(1);
     return 0;

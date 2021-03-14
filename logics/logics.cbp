@@ -32,23 +32,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="bin/Headers/butoane.h" />
-		<Unit filename="bin/Headers/culori.h" />
-		<Unit filename="bin/Headers/meniu.h" />
-		<Unit filename="bin/Headers/resurseMedia.h" />
-		<Unit filename="bin/Headers/textSettings.h" />
-		<Unit filename="bin/Sources/butoane.cpp" />
-		<Unit filename="bin/Sources/meniu.cpp" />
-		<Unit filename="bin/Sources/resurseMedia.cpp" />
-		<Unit filename="bin/Sources/textSettings.cpp" />
+		<Unit filename="Headers/butoane.h" />
+		<Unit filename="Headers/consola.h" />
+		<Unit filename="Headers/culori.h" />
+		<Unit filename="Headers/joc.h" />
+		<Unit filename="Headers/meniu.h" />
+		<Unit filename="Headers/resurseMedia.h" />
+		<Unit filename="Headers/textSettings.h" />
 		<Unit filename="bin/icon.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="butoane.cpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="meniu.cpp" />
-		<Unit filename="resurseMedia.cpp" />
-		<Unit filename="textSettings.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
