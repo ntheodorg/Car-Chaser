@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     cout<<endl;
-    initwindow(800,800,"Car-Chaser"); //mij ecranului
+    initwindow(800,1000,"Car-Chaser"); //mij ecranului
     initiereTextSettings();//INITIERE SETARILE DE STIL ALE TEXTULUI
     initiereButoane();//INITIALIZARE BUTOANELE DE MENIU
     existaFisiereDeSunet();//ACTIVARE SUNET(DACA FISIERELE SUNT LA LOCUL LOR)
@@ -24,7 +24,7 @@ int main()
 
         afisareMeniu(paginaMeniu);
 
-        delay(2);
+        delay(5);
         page=1-page; //ALTERNEAZA CADRUL INTRE 1 SI 0
     }while(1);
     return 0;

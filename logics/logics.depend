@@ -10,7 +10,7 @@
 
 1615729866 c:\users\theodor\documents\github\car-chaser\logics\bin\headers\culori.h
 
-1615741099 source:c:\users\theodor\documents\github\car-chaser\logics\main.cpp
+1615797598 source:c:\users\theodor\documents\github\car-chaser\logics\main.cpp
 	<winbgim.h>
 	<graphics.h>
 	<iostream>
@@ -36,7 +36,7 @@
 	"bin/Headers/textSettings.h"
 	<graphics.h>
 
-1615747200 c:\users\theodor\documents\github\car-chaser\logics\headers\meniu.h
+1615798974 c:\users\theodor\documents\github\car-chaser\logics\headers\meniu.h
 	"consola.h"
 	"culori.h"
 	"butoane.h"
@@ -51,9 +51,9 @@
 	"resurseMedia.h"
 	"culori.h"
 
-1615729866 c:\users\theodor\documents\github\car-chaser\logics\headers\culori.h
+1615800529 c:\users\theodor\documents\github\car-chaser\logics\headers\culori.h
 
-1615736015 c:\users\theodor\documents\github\car-chaser\logics\headers\resursemedia.h
+1615799998 c:\users\theodor\documents\github\car-chaser\logics\headers\resursemedia.h
 	<windows.h>
 	<mmsystem.h>
 
@@ -87,5 +87,5 @@
 
 1615736484 c:\users\theodor\documents\github\car-chaser\logics\headers\consola.h
 
-1615747375 c:\users\theodor\documents\github\car-chaser\logics\headers\joc.h
+1615804867 c:\users\theodor\documents\github\car-chaser\logics\headers\joc.h
 

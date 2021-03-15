@@ -3,6 +3,8 @@
 
 #include <windows.h>
 #include <mmsystem.h>
+#define SUNET_BUTON "bin//Audio//Buton_soundEffect.wav"
+#define SUNET_EXIT "bin//Audio//Exit_Button.wav"
 
 bool fisiereDeSunet=1;
 
@@ -14,6 +16,16 @@ void existaFisiereDeSunet()
         if ((fptr = fopen("bin//Audio//Exit_Button.wav","r")) != NULL)
             fisiereDeSunet=1;
     }
+    else if ((fptr = fopen("logics//bin//Audio//Buton_soundEffect.wav","r")) != NULL)
+    {
+        if ((fptr = fopen("logics//bin//Audio//Exit_Button.wav","r")) != NULL)
+            {
+                #undef SUNET_BUTON
+                #undef SUNET_EXIT
+                #define SUNET_BUTON "logics//bin//Audio//Buton_soundEffect.wav"
+                #define SUNET_EXIT "logics//bin//Audio//Exit_Button.wav"
+            }
+    }
     else
         fisiereDeSunet=0;
 }
@@ -23,9 +35,9 @@ void efectSonor(char* text)
     if(fisiereDeSunet)
     {
         if(!strcmp(text,"buton"))
-            PlaySound("bin//Audio//Buton_soundEffect.wav",NULL,SND_ASYNC);
+            PlaySound(SUNET_BUTON,NULL,SND_ASYNC);
         if(!strcmp(text,"iesire"))
-            PlaySound("bin//Audio//Exit_Button.wav",NULL,SND_SYNC);
+            PlaySound(SUNET_EXIT,NULL,SND_SYNC);
     }
 }
 

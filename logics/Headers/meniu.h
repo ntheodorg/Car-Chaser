@@ -60,8 +60,8 @@ void afisareMeniu(int &indexPagina)
     /**/
     /**MENIU DE LISTE**/
     case 11:
-        if(!joc()) indexPagina=1;
-        //buton e dupa ce moare
+        joc();
+        indexPagina=1;
         break;
     /**/
     /**IESIRE**/
