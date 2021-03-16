@@ -20,6 +20,7 @@ struct om
 struct obstacol
 {
     int x, y, W, H;
+    bool activ;
 };
 
 void crearePlansa(struct strat* arr, struct obstacol& lemne)
@@ -33,7 +34,7 @@ void crearePlansa(struct strat* arr, struct obstacol& lemne)
     lemne.H=20;
     lemne.W=100;
     lemne.x=arr[1].x;
-    lemne.y=0-lemne.H;
+    lemne.y=0;
 }
 
 void fata(int x, int y)
@@ -73,66 +74,78 @@ void animatieOm(om chaser, int x, float &time)
     }
 }
 
-void deseneaza(struct obstacol &lemne,int x, int y)
+void deseneaza(struct obstacol obiect,int x, int y)
 {
-    int W=lemne.W,H=lemne.H;
+    int W=obiect.W,H=obiect.H;
     rectangle(x-W/2,y-H/2,x+W/2,y+H/2);
+    //drawpoly doar cu poly sa se face fiecare desen in functia asta
 }
 
-obstacol* generator(strat* arr,obstacol& lemne)
+
+obstacol* generator(strat* arr,obstacol& lemne, obstacol* vect)
 {
     srand(time(NULL));
-    obstacol* vect=new obstacol[MAX_STRATURI];
-    int numarGenerat;
+    int numarGenerat,contor=0;
     for(int i=0;i<MAX_STRATURI;i++) //copiez marimea si schimb coordonatele
     {
         numarGenerat=rand()%100+0;
         if(numarGenerat%2==0)
         {
+            contor++;
             vect[i].H=lemne.H;
             vect[i].W=lemne.W;
             vect[i].x=arr[i].x;
             vect[i].y=vect[i].H;
+            vect[i].activ=1;
         }
         else
         {
-            vect[i].H=0;
-            vect[i].W=0;
             vect[i].x=0;
-            vect[i].y=0;
+            vect[i].activ=0;
         }
     }
+    if(contor==MAX_STRATURI) vect[rand()%MAX_STRATURI+0].activ=false;
     char ceva[1000];
-    /*sprintf(ceva,"%d %d %d",vect[0].x,vect[1].x,vect[2].x);
+    sprintf(ceva,"%d %d %d",vect[0].x,vect[1].x,vect[2].x);
     outtextxy(400,200,ceva);
     sprintf(ceva,"%d %d %d",vect[0].y,vect[1].y,vect[2].y);
-    outtextxy(400,300,ceva);*/
+    outtextxy(400,300,ceva);
     return vect;
 }
 bool ok=0;
-void obstacole(strat* arr, float time, struct obstacol &lemne)
+void obstacole(strat* arr, float &time, struct obstacol &lemne, obstacol *(&vect)[20],int &dimensiune)
 {
-    obstacol* obs;
-    int speed=1;
-    if(1)//&& time>10)
-        ok=1,obs=generator(arr,lemne);
+    int speed=2;
+    if(time>1)//&& time>10)
+    {
+        time=0;
+        /*GENERARE OBSTACOL*/
+        obstacol* obs=new obstacol[MAX_STRATURI];
+        ok=1,obs=generator(arr,lemne,obs);
+        vect[dimensiune]=obs;
+        if(dimensiune<20)
+            dimensiune++;
+       // delete[] obs;
+    }
 
     char ceva[1000];
-    sprintf(ceva,"%d %d %d",obs[0].x,obs[1].x,obs[2].x);
+    sprintf(ceva,"%d %d %d",vect[0][0].activ,vect[0][1].activ,vect[0][2].activ);
     outtextxy(400,400,ceva);
-    sprintf(ceva,"%d %d %d",obs[0].y,obs[1].y,obs[2].y);
-    outtextxy(400,500,ceva);
 
-    for(int i=0;i<MAX_STRATURI;i++)
-    {
-        //obs[i].y+=speed;
-        if(obs[i].W!=0 && obs[i].H!=0)
-            deseneaza(lemne,obs[i].x+i*2,obs[i].y+=2);
-    }
+   // for(int j=0;j<4;j++)
+    for(int i=0;i<dimensiune;i++)
+        for(int j=0;j<MAX_STRATURI;j++)
+        {
+            //obs[i].y+=speed;
+            if(vect[i][j].activ)
+                deseneaza(lemne,vect[i][j].x,vect[i][j].y+=speed);
+
+            sprintf(ceva,"i%d  j%d  dim%d     %d %d %d",i,j,dimensiune,vect[i][j].x,vect[i][j].x,vect[i][j].x);
+            outtextxy(400,500,ceva);
+            //delay(1000);
+        }
     //lemne.x
     //daca lemnele au ajuns jos delete
-
-
 }
 
 void joc()
@@ -143,11 +156,14 @@ void joc()
     struct om chaser;
     chaser.y=getmaxy()-100;
 
-    struct obstacol lemne;
-
     strat straturi[MAX_STRATURI];
 
+    struct obstacol lemne;
+
     crearePlansa(straturi,lemne);
+
+    obstacol *vect[20];
+    int dimensiune=0;
 
     int page=3,controller=1,pauza=0;
     float globalTime=0,animTime=0; //ANIMTIME E DOAR PENTRU OM DEOCAMDATA
@@ -160,7 +176,7 @@ void joc()
 
         outtextxy(200,200,"ciorba");
 
-        obstacole(straturi,globalTime,lemne); //OBSTACOLELE
+        obstacole(straturi,globalTime,lemne,vect,dimensiune); //OBSTACOLELE
 
         if(!pauza)
         {
@@ -182,7 +198,6 @@ void joc()
             }
             animatieOm(chaser,straturi[controller].x,animTime);
         }
-
         delay(5);
         page=7-page;
         if(globalTime> 100) break;
