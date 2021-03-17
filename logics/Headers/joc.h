@@ -21,10 +21,13 @@ struct obstacol
 {
     int x, y, W, H;
     bool activ;
+    bool traieste;
 };
 
-void crearePlansa(struct strat* arr, struct obstacol& lemne)
+void crearePlansa(struct om& player, struct strat* arr, struct obstacol& lemne)
 {
+    player.W=40; //latime de coliziune
+    player.H=50;    //inaltime de coliziune
     arr[1].x=getmaxx()/2;
     arr[1].y=getmaxy()-100;
     arr[0].x=arr[1].x/2;
@@ -49,9 +52,10 @@ void fata(int x, int y)
     line(x-7,y-12,x-5,y-12);
 }
 
-void animatieOm(om chaser, int x, float &time)
+void animatieOm(om& chaser, int x, float &time)
 {
     int y=chaser.y;
+    chaser.x=x;
     int stare=1;
     if(time>=0 && time<1) stare=1;
     else if(time>=1 && time<=1.99) stare=2;
@@ -103,49 +107,67 @@ obstacol* generator(strat* arr,obstacol& lemne, obstacol* vect)
             vect[i].x=0;
             vect[i].activ=0;
         }
+        vect[i].traieste=1;
     }
     if(contor==MAX_STRATURI) vect[rand()%MAX_STRATURI+0].activ=false;
-    char ceva[1000];
-    sprintf(ceva,"%d %d %d",vect[0].x,vect[1].x,vect[2].x);
-    outtextxy(400,200,ceva);
-    sprintf(ceva,"%d %d %d",vect[0].y,vect[1].y,vect[2].y);
-    outtextxy(400,300,ceva);
     return vect;
 }
 bool ok=0;
-void obstacole(strat* arr, float &time, struct obstacol &lemne, obstacol *(&vect)[20],int &dimensiune)
+int obstacole(strat* arr, float &time, struct obstacol &lemne, obstacol *(&vect)[20], int &dimensiune,om chaser, int &scor)
 {
-    int speed=2;
-    if(time>1)//&& time>10)
+    int lovit=0;
+    int speed=5;
+    obstacol* obs=new obstacol[MAX_STRATURI];
+    if(time>1 || !ok)//&& time>10)
     {
-        time=0;
+        time=0,ok=1;
         /*GENERARE OBSTACOL*/
-        obstacol* obs=new obstacol[MAX_STRATURI];
         ok=1,obs=generator(arr,lemne,obs);
-        vect[dimensiune]=obs;
-        if(dimensiune<20)
+        if(dimensiune>0)
+        for(int i=dimensiune-1;i>=0;i--)
+        {
+            vect[i+1]=vect[i];
+        }
+
+        vect[0]=obs;
+
+        if(dimensiune<19)
             dimensiune++;
-       // delete[] obs;
+        /*if(dimensiune==2)
+            delete[] obs;*/
     }
 
-    char ceva[1000];
-    sprintf(ceva,"%d %d %d",vect[0][0].activ,vect[0][1].activ,vect[0][2].activ);
-    outtextxy(400,400,ceva);
+   // sprintf(ceva,"%d %d %d",vect[0].y,vect[1].y,vect[2].y);
+    //outtextxy(400,300,ceva);
 
    // for(int j=0;j<4;j++)
     for(int i=0;i<dimensiune;i++)
         for(int j=0;j<MAX_STRATURI;j++)
         {
             //obs[i].y+=speed;
+            vect[i][j].y+=speed;
             if(vect[i][j].activ)
-                deseneaza(lemne,vect[i][j].x,vect[i][j].y+=speed);
-
-            sprintf(ceva,"i%d  j%d  dim%d     %d %d %d",i,j,dimensiune,vect[i][j].x,vect[i][j].x,vect[i][j].x);
-            outtextxy(400,500,ceva);
-            //delay(1000);
+            {
+                deseneaza(lemne,vect[i][j].x,vect[i][j].y);
+                if(vect[i][j].y>=(chaser.y-(chaser.H/2)) && vect[i][j].y<=(chaser.y+(chaser.H/2)))
+                    if(vect[i][j].x>=(chaser.x-(chaser.W/2)) && vect[i][j].x<=(chaser.x+(chaser.W/2)))
+                    {
+                        lovit=32;
+                        break;
+                    }
+            }
+            if(vect[i][j].y>=getmaxy()+vect[i][j].H && vect[i][j].y<=getmaxy()+vect[i][j].H+100)
+            {
+                if(vect[i][0].traieste!=0)
+                {
+                    delete[] vect[i],dimensiune--,scor++;
+                    for(int k=0;k<MAX_STRATURI;k++)
+                        vect[i][k].traieste=0;
+                }
+                break;
+            }
         }
-    //lemne.x
-    //daca lemnele au ajuns jos delete
+    return lovit;
 }
 
 void joc()
@@ -160,13 +182,15 @@ void joc()
 
     struct obstacol lemne;
 
-    crearePlansa(straturi,lemne);
+    crearePlansa(chaser,straturi,lemne);
 
-    obstacol *vect[20];
+    obstacol *vect[20]={};
     int dimensiune=0;
 
-    int page=3,controller=1,pauza=0;
-    float globalTime=0,animTime=0; //ANIMTIME E DOAR PENTRU OM DEOCAMDATA
+    int page=3,controller=1,mort=0,scor=0,scorFinal;
+    float globalTime=0,animTime=0,stopJoc=0;
+    char ceva[1000];
+
     //animatieOm(straturi[1].x,straturi[1].y); //press any key to start
     while(1)
     {
@@ -174,33 +198,65 @@ void joc()
         setactivepage(7-page);//ACTIVARE PAGINA NEFOLOSITA
         cleardevice(); //GOLIRE PAGINA ACTIVA*/
 
-        outtextxy(200,200,"ciorba");
 
-        obstacole(straturi,globalTime,lemne,vect,dimensiune); //OBSTACOLELE
 
-        if(!pauza)
+        if(!stopJoc)
         {
-            globalTime+=0.01;
-            animTime+=0.01;
-            if(kbhit())
+            if(!mort)
+                mort=obstacole(straturi,globalTime,lemne,vect,dimensiune,chaser,scor); //OBSTACOLELE
+            else
+                obstacole(straturi,globalTime,lemne,vect,dimensiune,chaser,scor); //OBSTACOLELE
+
+            if(mort!=32)
             {
-                switch(getch())
+                globalTime+=0.01;
+                animTime+=0.01;
+                if(kbhit())
                 {
-                case 'd':
-                case 77:
-                    if(controller<MAX_STRATURI-1) controller++;
-                    break;
-                case 'a':
-                case 75:
-                    if(controller>0) controller--;
-                    break;
+                    switch(getch())
+                    {
+                    case 'd':
+                    case 77:
+                        if(controller<MAX_STRATURI-1) controller++;
+                        break;
+                    case 'a':
+                    case 75:
+                        if(controller>0) controller--;
+                        break;
+                    }
                 }
+
+                sprintf(ceva,"%d",scor);
+                outtextxy(getmaxx()/2,200,ceva);
+                scorFinal=scor;
+
+                animatieOm(chaser,straturi[controller].x,animTime);
             }
-            animatieOm(chaser,straturi[controller].x,animTime);
+            if(dimensiune==0 && mort) stopJoc=1;
         }
-        delay(5);
+
+        if(stopJoc)
+        {
+
+            globalTime+=0.1;
+
+            outtextxy(getmaxx()/2,getmaxy()/2,"Felicitari!");
+            sprintf(ceva,"Scor: %d",scorFinal);
+            outtextxy(getmaxx()/2,getmaxy()/2+50,ceva);
+
+            if(globalTime > 1 && globalTime<=1.5)
+            {
+                outtextxy(getmaxx()/2,getmaxy()-200,"Apasa   o   tasta...");
+            }
+            if(globalTime>1.5)
+            {
+                getch();
+                break;
+            }
+        }
+
+        delay(10);
         page=7-page;
-        if(globalTime> 100) break;
     }
 }
 
