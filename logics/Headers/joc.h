@@ -240,13 +240,13 @@ void joc()
 
             globalTime+=0.1;
 
-            outtextxy(getmaxx()/2,getmaxy()/2,"Felicitari!");
+            outtextxy(getmaxx()/2,getmaxy()/2,"FELICITARI!");
             sprintf(ceva,"Scor: %d",scorFinal);
             outtextxy(getmaxx()/2,getmaxy()/2+50,ceva);
 
             if(globalTime > 1 && globalTime<=1.5)
             {
-                outtextxy(getmaxx()/2,getmaxy()-200,"Apasa   o   tasta...");
+                outtextxy(getmaxx()/2,getmaxy()-200,"APASA   O   TASTA...");
             }
             if(globalTime>1.5)
             {
