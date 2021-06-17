@@ -1,8 +1,6 @@
 #ifndef CULORI_H_INCLUDED
 #define CULORI_H_INCLUDED
 
-#define BGColor BLACK //CULOARE FUNDAL SCRIS
-#define PColor  WHITE //CULOARE PRINCIPALA
 
 
 /*              BLACK	        0
@@ -22,4 +20,12 @@
                 YELLOW	        14
                 WHITE	        15                */
 
+struct clasaCulori
+{
+    int BGColor=CYAN;
+    int PColor=WHITE;
+};
+clasaCulori culori;
+
 #endif // CULORI_H_INCLUDED
+

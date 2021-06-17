@@ -11,8 +11,8 @@ void Iesire()
 {
         setactivepage(3);//ACTIVARE PAGINA NEFOLOSITA
         cleardevice();//CURATARE ECRAN
-        setbkcolor(BGColor);
-        setcolor(PColor);
+        setbkcolor(culori.BGColor);
+        setcolor(culori.PColor);
         outtextxy(getmaxx()/2,getmaxy()/2,"EXITING...");
         setvisualpage(3);//AFISARE ACEEASI PAGINA
         efectSonor("iesire");
@@ -26,7 +26,7 @@ void afisareMeniu(int &indexPagina)
     int x,y; //COORDONATE PENTRU MOUSE
     bool consolaAfisata=1;
     x=mousex(),y=mousey(); //VERIFICA POZITIA MOUSE-ULUI LA FIECARE CADRU
-    setbkcolor(BGColor);
+    setbkcolor(culori.BGColor);
     if(consolaAfisata) ascundeConsola(),consolaAfisata=0; //ascunde
     switch(indexPagina)
     {
@@ -45,7 +45,7 @@ void afisareMeniu(int &indexPagina)
     /**CULORI & LIMBA & VITEZA & BACK**/
     case 12:
         /*CULORI*/
-        dinamicaButon(x,y,4,indexPagina,12);
+        dinamicaButon(x,y,4,indexPagina,121);
         //
         /*LIMBA*/
         dinamicaButon(x,y,5,indexPagina,12);
@@ -58,7 +58,29 @@ void afisareMeniu(int &indexPagina)
         //
         break;
     /**/
-    /**MENIU DE LISTE**/
+
+    /**CULORI**/
+    case 121:
+
+        /*INVERT*/
+        dinamicaButonCuloriInvert(x,y,13);
+        //
+        /*CLASIC*/
+        dinamicaButonCulori(x,y,10,BLACK,WHITE);
+        //
+        /*SET 2*/
+        dinamicaButonCulori(x,y,11,BROWN,YELLOW);
+        //
+        /*SET 3*/
+        dinamicaButonCulori(x,y,12,BLUE,CYAN);
+        //
+
+        /*BACK*/
+        dinamicaButon(x,y,7,indexPagina,1);
+        //
+        break;
+    /**/
+    /**JOACA**/
     case 11:
         joc();
         indexPagina=1;

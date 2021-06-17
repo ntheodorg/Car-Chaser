@@ -42,12 +42,12 @@ void crearePlansa(struct om& player, struct strat* arr, struct obstacol& lemne)
 
 void fata(int x, int y)
 {
-    setfillstyle(SOLID_FILL,BGColor);
+    setfillstyle(SOLID_FILL,culori.BGColor);
     fillellipse(x,y,20,20);
-    putpixel(x+6,y-13,PColor);
-    putpixel(x+6,y-11,PColor);
-    putpixel(x-6,y-13,PColor);
-    putpixel(x-6,y-11,PColor);
+    putpixel(x+6,y-13,culori.PColor);
+    putpixel(x+6,y-11,culori.PColor);
+    putpixel(x-6,y-13,culori.PColor);
+    putpixel(x-6,y-11,culori.PColor);
     line(x+7,y-12,x+5,y-12);
     line(x-7,y-12,x-5,y-12);
 }
@@ -172,8 +172,8 @@ int obstacole(strat* arr, float &time, struct obstacol &lemne, obstacol *(&vect)
 
 void joc()
 {
-    setbkcolor(BGColor);
-    setcolor(PColor);
+    setbkcolor(culori.BGColor);
+    setcolor(culori.PColor);
 
     struct om chaser;
     chaser.y=getmaxy()-100;
